@@ -16,7 +16,7 @@ class InvertedDoublePendulumEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def __init__(self, frame_skip=4):
         # self.cfg = cfg
-        mujoco_assets_dir = os.path.abspath("./mujoco/assets/")
+        mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
         self.initialised = False
         mujoco_env.MujocoEnv.__init__(
             self, os.path.join(mujoco_assets_dir, "inverted_double_pendulum.xml"), frame_skip

@@ -13,7 +13,7 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         * is_done METHOD SHOULD BE IMPLEMENTED
     """
     def __init__(self, frame_skip=10):
-        mujoco_assets_dir = os.path.abspath("./mujoco/assets/")
+        mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
         # self.cfg = cfg
         self.frame_skip = frame_skip
         self.initialised = False

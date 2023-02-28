@@ -18,7 +18,7 @@ class HopperEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def __init__(self, frame_skip=20):
         # self.cfg = cfg
         self.frame_skip = frame_skip
-        mujoco_assets_dir = os.path.abspath("./mujoco/assets/")
+        mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
         self.initialised = False
         mujoco_env.MujocoEnv.__init__(self, os.path.join(mujoco_assets_dir, "hopper.xml"), self.frame_skip)
         utils.EzPickle.__init__(self)

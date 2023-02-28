@@ -1,25 +1,24 @@
-import gym
 import torch
 import torch.nn as nn
 
-from model.mujoco import mj_torch_block_factory
-from mujoco.utils.wrappers.mj_block import MjBlockWrapper
-from mujoco.utils.wrappers.etc import SnapshotWrapper, IndexWrapper
+from differentiable_mujoco.torch_block import mj_torch_block_factory
+from differentiable_mujoco.utils.wrappers.mj_block import MjBlockWrapper
+from differentiable_mujoco.utils.wrappers.etc import SnapshotWrapper, IndexWrapper
 
 
 def build_env(env_name, batch_size):
     if env_name == "HopperEnv":
-        from mujoco.envs.hopper import HopperEnv as env_cls
+        from differentiable_mujoco.envs.hopper import HopperEnv as env_cls
     elif env_name == "HalfCheetahEnv":
-        from mujoco.envs.half_cheetah import HalfCheetahEnv as env_cls
+        from differentiable_mujoco.envs.half_cheetah import HalfCheetahEnv as env_cls
     elif env_name == "SwimmerEnv":
-        from mujoco.envs.swimmer import SwimmerEnv as env_cls
+        from differentiable_mujoco.envs.swimmer import SwimmerEnv as env_cls
     elif env_name == "InvertedPendulumEnv":
-        from mujoco.envs.inverted_pendulum import InvertedPendulumEnv as env_cls
+        from differentiable_mujoco.envs.inverted_pendulum import InvertedPendulumEnv as env_cls
     elif env_name == "InvertedDoublePendulumEnv":
-        from mujoco.envs.inverted_double_pendulum import InvertedDoublePendulumEnv as env_cls
+        from differentiable_mujoco.envs.inverted_double_pendulum import InvertedDoublePendulumEnv as env_cls
     elif env_name == "Walker2dEnv":
-        from mujoco.envs.walker2d import Walker2dEnv as env_cls
+        from differentiable_mujoco.envs.walker2d import Walker2dEnv as env_cls
     else:
         raise ValueError
 
