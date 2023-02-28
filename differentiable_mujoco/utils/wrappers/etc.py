@@ -109,9 +109,12 @@ class IndexWrapper(gym.Wrapper):
         env.unwrapped._episode_idx = self._episode_idx
         env.unwrapped._batch_idx = self._batch_idx
 
-    def step(self, action):
+    def step(self, action, if_increment=True):
         self._step_idx += 1
         return self.env.step(action)
+
+    def decrement(self):
+        self._step_idx -= 1
 
     def reset(self, update_episode_idx=True):
         self._step_idx.set(0)

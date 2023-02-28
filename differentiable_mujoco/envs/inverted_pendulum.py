@@ -1,5 +1,4 @@
 import os
-import torch
 import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
@@ -18,7 +17,7 @@ class InvertedPendulumEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         # self.cfg = cfg
         self.frame_skip = frame_skip
         utils.EzPickle.__init__(self)
-        mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
+        mujoco_assets_dir = os.path.abspath("./gen_rl/envs/differentiable_mujoco/assets/")
         mujoco_env.MujocoEnv.__init__(self, os.path.join(mujoco_assets_dir, "inverted_pendulum.xml"), self.frame_skip)
 
     def step(self, a):

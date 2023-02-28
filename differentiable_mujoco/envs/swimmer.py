@@ -15,7 +15,7 @@ class SwimmerEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def __init__(self, frame_skip=10):
         # self.cfg = cfg
         self.frame_skip = frame_skip
-        mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
+        mujoco_assets_dir = os.path.abspath("./gen_rl/envs/differentiable_mujoco/assets/")
         mujoco_env.MujocoEnv.__init__(self, os.path.join(mujoco_assets_dir, "swimmer.xml"), self.frame_skip)
         utils.EzPickle.__init__(self)
 

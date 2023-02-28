@@ -1,6 +1,4 @@
 import gym
-import numpy as np
-
 from differentiable_mujoco.utils.forward import mj_forward_factory
 from differentiable_mujoco.utils.backward import mj_gradients_factory
 

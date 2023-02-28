@@ -1,7 +1,5 @@
 import mujoco_py as mj
 import numpy as np
-import torch
-from copy import deepcopy
 
 nwarmup = 3
 eps = 1e-6
@@ -115,6 +113,7 @@ def calculate_gradients(agent, data_snapshot, next_state, reward):
         # Compute gradient of reward wrt qpos
         drdqpos[0, i] = (info[1] - reward) / eps
 
+    # import pudb; pudb.start()
     # Set dynamics gradients
     agent.dynamics_gradients = {"state": np.concatenate((dsdqpos, dsdqvel), axis=1), "action": dsdctrl}
 
@@ -128,5 +127,4 @@ def mj_gradients_factory(agent, mode):
     @agent.gradient_wrapper(mode)
     def mj_gradients(data_snapshot, next_state, reward):
         calculate_gradients(agent, data_snapshot, next_state, reward)
-
     return mj_gradients

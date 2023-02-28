@@ -34,6 +34,7 @@ def mj_forward_factory(agent, mode):
 
         # Advance simulation with one step
         next_state, agent.reward, agent.is_done, _ = agent.step(action)
+        agent.decrement()
 
         return next_state
 

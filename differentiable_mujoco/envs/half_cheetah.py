@@ -12,9 +12,11 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         * FULL STATE OBSERVATIONS, I.E. QPOS CONCAT'D WITH QVEL.
         * is_done METHOD SHOULD BE IMPLEMENTED
     """
-    def __init__(self, frame_skip=10):
+    def __init__(self, max_episode_steps, frame_skip=10):
         mujoco_assets_dir = os.path.abspath("./differentiable_mujoco/assets/")
         # self.cfg = cfg
+        self._ts = 0
+        self._max_steps = max_episode_steps
         self.frame_skip = frame_skip
         self.initialised = False
         mujoco_env.MujocoEnv.__init__(self, os.path.join(mujoco_assets_dir, "half_cheetah.xml"), self.frame_skip)
@@ -29,7 +31,8 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         reward_ctrl = - 0.01 * np.square(action).sum()
         reward_run = (xposafter - xposbefore) / self.dt
         reward = reward_ctrl + reward_run
-        done = False
+        done = self._ts >= self._max_steps
+        self._ts += 1
         return ob, reward, done, dict(reward_run=reward_run, reward_ctrl=reward_ctrl)
 
     def _get_obs(self):
@@ -40,6 +43,7 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         ])
 
     def reset_model(self):
+        self._ts = 0
         self.sim.reset()
         # if self.cfg.MODEL.POLICY.NETWORK:
         #     self.set_state(
