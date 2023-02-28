@@ -66,20 +66,3 @@ class InvertedDoublePendulumEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             arm_length * np.sin(theta_1 + theta_2)
         done = bool(y <= 1)
         return done
-
-    def tensor_reward(self, state, action, next_state):
-        """DIFFERENT FROM ORIGINAL GYM"""
-        arm_length = 0.6
-        theta_1 = next_state[1]
-        theta_2 = next_state[2]
-        y = arm_length * torch.cos(theta_1) + \
-            arm_length * torch.cos(theta_1 + theta_2)
-        x = arm_length * torch.cos(theta_1) + \
-            arm_length * torch.cos(theta_1 + theta_2) + \
-            next_state[0]
-        dist_penalty = 0.01 * x ** 2 + (y - 2) ** 2
-        v1, v2 = next_state[4:6]
-        vel_penalty = 1e-3 * v1 ** 2 + 5e-3 * v2 ** 2
-        alive_bonus = 10
-        reward = alive_bonus - dist_penalty - vel_penalty
-        return reward.view([1, ])

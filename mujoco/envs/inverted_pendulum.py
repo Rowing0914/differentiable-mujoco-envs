@@ -56,15 +56,3 @@ class InvertedPendulumEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def is_done(state):
         done = False
         return done
-
-    def tensor_reward(self, state, action, next_state):
-        """DIFFERENT FROM ORIGINAL GYM"""
-        arm_length = 0.6
-        theta = next_state[1]
-        y = arm_length * torch.cos(theta)
-        x = arm_length * torch.cos(theta)
-        dist_penalty = 0.01 * x ** 2 + (y - 1) ** 2
-        v = next_state[3]
-        vel_penalty = 1e-3 * v ** 2
-        reward = -dist_penalty - vel_penalty
-        return reward.view([1, ])
