@@ -2,7 +2,7 @@ import gym
 import torch
 import torch.nn as nn
 
-from model.blocks.mujoco import mj_torch_block_factory
+from model.mujoco import mj_torch_block_factory
 from mujoco.utils.wrappers.mj_block import MjBlockWrapper
 from mujoco.utils.wrappers.etc import SnapshotWrapper, IndexWrapper
 
